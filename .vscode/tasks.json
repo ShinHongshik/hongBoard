@@ -1,0 +1,115 @@
+// {
+//   "version": "2.0.0",
+//   "tasks": [
+//     {
+//       "label": "Flash",
+//       "type": "shell",
+//       "command": "openocd",
+//       "args": [
+//         "-f",
+//         "interface/cmsis-dap.cfg",
+//         "-f",
+//         "target/rp2040.cfg",
+//         "-c",
+//         "adapter speed 5000; program {${command:cmake.launchTargetPath}} verify reset exit"
+//       ],
+//       "problemMatcher": []
+//     },
+//     {
+//       "label": "Build",
+//       "type": "cmake",
+//       "command": "build",
+//       "problemMatcher": "$gcc",
+//       "group": {
+//         "kind": "build",
+//         "isDefault": true
+//       }
+//     }
+//   ]
+// }
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//https://code.visualstudio.com/docs/editor/tasks
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "rm exist build file",
+            // "command": "cmake --build build -j16",
+            "command": "rm -rf",
+            "args": [
+              // "-rf",
+              "build"
+              // "${workspaceFolder}/build/${fileBasenameNoExtension}",
+              // "${workspaceFolder}/build/${fileBasenameNoExtension}",
+              // "Y"
+              // "./build"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/build"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": {
+                "base": "$gcc", 
+                "fileLocation": ["relative", "${workspaceFolder}/build"]
+            }
+        },
+        {
+            "type": "shell",
+            "label": "Build Project",
+            // "command": "cmake --build build -j16",
+            "command": "cmake --build . -j16",
+            "options": {
+                "cwd": "${workspaceFolder}/build"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": {
+                "base": "$gcc", 
+                "fileLocation": ["relative", "${workspaceFolder}/build"]
+            }
+        },
+        {
+            "type": "shell",
+            "label": "Configure Project",
+            "command": "cmake -S . -B build -G 'MinGW Makefiles'",
+            //"command": "cmake -DCMAKE_MAKE_PROGRAM='ninja.exe' -G 'Ninja' .. "
+            "options": {
+                "cwd": "${workspaceFolder}/"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": {
+                "base": "$gcc", 
+                "fileLocation": ["relative", "${workspaceFolder}/"]
+            }
+        },
+        // {
+        //   "label": "configure windows",
+        //   "type": "shell",
+        //   // "command": "cmake -S . -B build -DPICO_BOARD=pico -G 'MinGW Makefiles' -DPICO_SDK_PATH='C:/Dev/pico/pico-sdk'",
+        //   "command": "cmake -S . -B build -G 'MinGW Makefiles' -DPICO_SDK_PATH='C:/Dev_Lib/pico-sdk' -DPICO_EXTRAS_PATH='C:/Dev_Lib/pico-extras'",
+        //   "problemMatcher": [],
+        //   "group": "build"
+        // },
+        {
+            "label": "down Windows",
+            "type": "shell",
+            "command": "./tools/windows/rp2040_loader.exe -p com43 -f build/src/HongRp2040.bin -r",
+            // "command": "./tools/windows/rp2040_loader.exe -p com44 -f build/src/rp2040_fw.bin -r",
+            "group": {
+              "kind": "build",
+              "isDefault": true
+            }      
+        },
+    ]
+}
