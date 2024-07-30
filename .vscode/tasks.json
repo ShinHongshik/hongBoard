@@ -104,7 +104,7 @@
         {
             "label": "down Windows",
             "type": "shell",
-            "command": "./tools/windows/rp2040_loader.exe -p com43 -f build/src/HongRp2040.bin -r",
+            "command": "./tools/windows/rp2040_loader.exe -p com11 -f build/src/HongRp2040.bin -r",
             // "command": "./tools/windows/rp2040_loader.exe -p com44 -f build/src/rp2040_fw.bin -r",
             "group": {
               "kind": "build",

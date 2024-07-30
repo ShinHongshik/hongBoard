@@ -66,6 +66,7 @@ target_link_libraries(${PRJ_NAME}
   DHCP_FILES
   DNS_FILES
   TIMER_FILES
+  SNTP_FILES
 )
 
 if (FREERTOS_USAGE)

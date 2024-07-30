@@ -20,7 +20,7 @@
   // #define _HW_DEF_RTOS_THREAD_PRI_TVWEB         ( tskIDLE_PRIORITY + 1UL )
 
   #define _HW_DEF_RTOS_THREAD_MEM_MAIN          _HW_DEF_RTOS_MEM_SIZE( 1*2048)
-  #define _HW_DEF_RTOS_THREAD_MEM_CLI           _HW_DEF_RTOS_MEM_SIZE( 1*2048)
+  #define _HW_DEF_RTOS_THREAD_MEM_CLI           _HW_DEF_RTOS_MEM_SIZE( 2*2048)
   // #define _HW_DEF_RTOS_THREAD_MEM_TVWEB         _HW_DEF_RTOS_MEM_SIZE( 1*1024)
 #endif
 

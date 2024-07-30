@@ -38,7 +38,9 @@
     "cli.h": "c",
     "uart.h": "c",
     "hw.h": "c",
-    "adc.h": "c"
+    "adc.h": "c",
+    "ctime": "cpp",
+    "xlocale": "cpp"
   },
   // "cortex-debug.openocdPath": "C:/Dev_Tool/ArmToolChain/openocd/src/openocd.exe",
 }

@@ -182,7 +182,6 @@ void wizchip_initialize(void)
 {
     /* Deselect the FLASH : chip select high */
     wizchip_deselect();
-
     /* CS function register */
     reg_wizchip_cs_cbfunc(wizchip_select, wizchip_deselect);
 
