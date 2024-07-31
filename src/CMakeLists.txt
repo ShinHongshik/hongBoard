@@ -1,20 +1,22 @@
 
 # file(GLOB SRC_FILES  
 file(GLOB SRC_FILES CONFIGURE_DEPENDS 
-  hw/*.c
-  ap/*.cpp
-  bsp/*.c
-  bsp/rtos/*.c
-  hw/driver/*.c
-  common/core/*.c
-  ap/app/*.c
+  # hw/*.c
+  # ap/*.c
+  # ap/*.cpp
+  # bsp/*.c
+  # bsp/rtos/*.c
+  # hw/driver/*.c
+  # common/core/*.c
+  *.cpp
 )
 
 # file(GLOB_RECURSE SRC_FILES_RECURSE 
 file(GLOB_RECURSE SRC_FILES_RECURSE CONFIGURE_DEPENDS
-  hw/*.c
   ap/*.cpp
+  bsp/*.c
   common/*.c
+  hw/*.c
   hw/driver/*.c
 )
 
@@ -33,7 +35,7 @@ add_executable(
 
 target_include_directories(${PRJ_NAME} PUBLIC
   ap
-  ap/app
+  ap/include
   bsp
   bsp/rtos 
   common
@@ -59,6 +61,7 @@ target_link_libraries(${PRJ_NAME}
   hardware_adc
   pico_multicore
 
+  TFTP_FILES
   ETHERNET_FILES
   SPI_FILES
   LOOPBACK_FILES 
@@ -70,13 +73,19 @@ target_link_libraries(${PRJ_NAME}
 )
 
 if (FREERTOS_USAGE)
-    add_compile_definitions(FREERTOS_USE=${FREERTOS_USAGE})
+  add_compile_definitions(FREERTOS_USE=${FREERTOS_USAGE})
+  # add_compile_definitions(FREE_RTOS_KERNEL_SMP=1)
+  # add_compile_definitions(portSUPPORT_SMP=1)
 
-    target_link_libraries(${PRJ_NAME} 
-        FreeRTOS-Kernel-Heap4
-    )
+  target_link_libraries(${PRJ_NAME} 
+    FreeRTOS-Kernel-Heap4
+  )
 endif ()
 
+# target_compile_definitions(${PRJ_NAME}
+  # FREE_RTOS_KERNEL_SMP=1
+  # portSUPPORT_SMP=1
+# )
 
 # enable usb output, disable uart output
 pico_enable_stdio_usb(${PRJ_NAME}  1)

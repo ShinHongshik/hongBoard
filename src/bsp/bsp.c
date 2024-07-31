@@ -9,8 +9,8 @@ void SysTick_Handler(void)
 
 bool bspInit(void)
 {
-  // set_sys_clock_khz(250000, true); // overclock the rp2040 to 250mhz
-  set_sys_clock_khz(133000, true); // overclock the rp2040 to 250mhz
+  set_sys_clock_khz(250000, true); // overclock the rp2040 to 250mhz
+  // set_sys_clock_khz(133000, true); // overclock the rp2040 to 250mhz
   
   stdio_init_all();
 #if ( FREERTOS_USE == 1 )     

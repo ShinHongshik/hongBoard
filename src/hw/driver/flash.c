@@ -294,7 +294,7 @@ void cliFlash(cli_args_t *args)
 
     for (int i=0; i<length; i++)
     {
-      cliPrintf("0x%X : 0x%X\n", addr+i, *((uint8_t *)(addr+i)));
+      cliPrintf("0x%X : 0x%X\r\n", addr+i, *((uint8_t *)(addr+i)));
     }
 
     ret = true;

@@ -15,6 +15,7 @@ bool hwInit(void)
   resetInit();
   i2cInit();
 
+  flashInit();
   uartInit();
 
   return true;
