@@ -12,6 +12,7 @@
 #include "uart.h"
 #include "led.h"
 #include "i2c.h"
+#include "cmd_can.h"
 
 
 

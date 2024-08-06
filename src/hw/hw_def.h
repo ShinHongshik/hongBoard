@@ -98,7 +98,9 @@
 
 
 
-
+#define _USE_HW_CMD_CAN
+#define     HW_CMD_CAN_MAX_DATA_LENGTH   1024
+// #define     HW_CMD_CAN_MAX_DATA_LENGTH   2048
 
 
 

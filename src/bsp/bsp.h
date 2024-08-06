@@ -14,8 +14,14 @@
 #include "pico/platform.h"
 #include "hardware/adc.h"
 
+
 #if (FREERTOS_USE == 1)
   #include "rtos.h"
+
+  #if (FREE_RTOS_KERNEL_SMP == 1 )
+    #include "pico/multicore.h"
+  #endif
+
 #endif
 
 bool bspInit(void);

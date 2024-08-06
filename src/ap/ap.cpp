@@ -1,6 +1,10 @@
 #include "ap.h"
 #include "EthernetManager.hpp"
+#include "can_driver.h"
 
+
+static cmd_can_t cmd_can;
+// static void apCore1(void *pvParameters);
 static void cliThread(void *args);
 
 
@@ -110,7 +114,6 @@ void apInit(void)
   cliOpen(_DEF_UART1, 115200);
   uartOpen(_DEF_UART2, 115200);
 
-
 #if ( FREERTOS_USE == 1 )
   xTaskCreate(cliThread, "cliThread", _HW_DEF_RTOS_THREAD_MEM_CLI , NULL , _HW_DEF_RTOS_THREAD_PRI_CLI , NULL );
 #endif
@@ -118,11 +121,21 @@ void apInit(void)
 #ifdef _USE_HW_CLI
   // cliAdd("test", cliTest);
 #endif
+  delay(1000);
+  // cmdCanInit(&cmd_can, canDriverGetPtr());
+  ledOn(0);
+  // cmdCanOpen(&cmd_can);
+  ledOff(0);
 }
 uint8_t g_tftpInitEnable = 1;
 void apMain(void)
 {
   static volatile uint8_t cnttttt = 0;
+
+
+
+
+
   while(true)
   {
     cliMain();    
@@ -135,10 +148,15 @@ void apMain(void)
         cnttttt = 0;
       }
     }
+
     delay(5);
   }
 }
 
+
+
+
+#if 1
 static void cliThread(void *args)
 {
 #if 0
@@ -192,11 +210,16 @@ static void cliThread(void *args)
 #endif
   uint32_t pre_time = 0 ;
   uint8_t t1= 0;
+  static uint32_t heart_cnt = 0;
 
   EthernetManager::InitInstance(MAC_ADDRESS, DHCP_ENABLED);
   EthernetManager::GetInstance()->AddSocket(std::make_shared<EventSocket>(SOCKET_PORT_DEFAULT, SocketMode::UDP_PEER));
 
   is_init = true;
+
+
+  cmdCanInit(&cmd_can, canDriverGetPtr());
+  cmdCanOpen(&cmd_can);
 
   while(true)
   {
@@ -223,6 +246,8 @@ static void cliThread(void *args)
       }
     }
     #endif
+
+    #if 1 
     EthernetManager::GetInstance()->Run();
     if (millis() - pre_time >= 500) {
       AP_LOGGER_PRINT("running EthernetManager\r\n");
@@ -230,10 +255,27 @@ static void cliThread(void *args)
       ledToggle(0);
     }
 
-    delay(100);
 
     if (EthernetManager::GetInstance()->IsAssignedIP()) {
-        EthernetLoopBack();
+
+        // EthernetLoopBack();
+        if ( cmdCanReceivePacket(&cmd_can) == true ) {
+          bool ret = false;
+
+          // if ( cmd_can.rx_packet.type == PKT_TYPE_CMD ) {
+          //   switch ( cmd_can.rx_packet.cmd ) {
+          //     case PKT_CMD_PING:
+          //       memcpy(cmd_can.packet.data, &heart_cnt, sizeof(heart_cnt));
+          //       cmdCanSendResp(&cmd_can, cmd_can.rx_packet.cmd, cmd_can.packet.data, sizeof(heart_cnt));
+          //       heart_cnt++;
+          //       break;
+
+          //     default:
+          //       break;
+          //   }
+          // }
+        }
+
         if (!t1 )
         {
           cliPrintf("IP %d.%d.%d.%d\r\n", EthernetManager::GetInstance()->GetIPAddress()[0],
@@ -242,9 +284,12 @@ static void cliThread(void *args)
           t1 = 1;
         }
     }
+    delay(1);
+    #endif
 
   }
 }
+#endif
 
 void EthernetLoopBack(void) {
   if (EthernetManager::GetInstance()->IsAssignedIP()) {

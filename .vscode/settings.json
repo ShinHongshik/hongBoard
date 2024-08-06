@@ -27,8 +27,8 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 {
-  "cmake.buildBeforeRun": true,
-  "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
+  // "cmake.buildBeforeRun": true,
+  // "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
   "files.associations": {
     "wizchip_conf.h": "c",
     "ftpc.h": "c",
@@ -46,7 +46,13 @@
     "array": "cpp",
     "vector": "cpp",
     "xstring": "cpp",
-    "xutility": "cpp"
+    "xutility": "cpp",
+    "fstream": "c",
+    "cmd_can.h": "c",
+    "iosfwd": "c"
   },
+  "clangd.detectExtensionConflicts": true,
+  "C_Cpp.autocomplete": "default",
+  "C_Cpp.intelliSenseEngine": "default"
   // "cortex-debug.openocdPath": "C:/Dev_Tool/ArmToolChain/openocd/src/openocd.exe",
 }

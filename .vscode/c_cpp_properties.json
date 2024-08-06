@@ -2,14 +2,21 @@
   "configurations": [
     {
       "name": "Pico",
+      // "compileCommands":"${workspaceFolder}/build/compile_commands.json",
       "includePath": [
         "${workspaceFolder}/**",
         // "${env:PICO_SDK_PATH}/**"
       ],
-      "defines": [],
+      "defines": [
+        "_DEBUG",
+        "UNICODE",
+        "_UNICODE"
+      ],
+      "compileCommands":"${workspaceFolder}/build/compile_commands.json",
       // "compilerPath": "${env:PICO_INSTALL_PATH}/gcc-arm-none-eabi/bin/arm-none-eabi-gcc.exe",
-      "cStandard": "c11",
-      "cppStandard": "c++11",
+      "cStandard": "c17",
+      // "cppStandard": "c++17",
+      "cppStandard": "gnu++14",
       "intelliSenseMode": "linux-gcc-arm",
       "configurationProvider": "ms-vscode.cmake-tools"
     }

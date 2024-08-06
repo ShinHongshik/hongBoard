@@ -1,5 +1,8 @@
 #ifndef SRC_COMMON_ERR_CODE_H_
 #define SRC_COMMON_ERR_CODE_H_
+#ifdef __cplusplus
+  extern "C" {
+#endif
 
 
 #define OK                            0
@@ -20,6 +23,18 @@
 #define ERR_BOOT_FW_CRC               18
 #define ERR_BOOT_JUMP_TO_FW           19
 #define ERR_BOOT_INVALID_TAG          20
+
+
+#define ERR_CMD_MAX_LENGTH            0x0020
+#define ERR_CMD_CHECKSUM              0x0021
+#define ERR_CMD_RX_TIMEOUT            0x0022
+#define ERR_CMD_NO_CMD                0x0023
+
+
+#ifdef __cplusplus
+  }
+#endif
+
 
 
 #endif

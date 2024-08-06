@@ -63,7 +63,7 @@
             "type": "shell",
             "label": "Build Project",
             // "command": "cmake --build build -j16",
-            "command": "cmake --build . -j16",
+            "command": "cmake --build . -j8",
             "options": {
                 "cwd": "${workspaceFolder}/build"
             },
