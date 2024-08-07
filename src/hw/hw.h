@@ -13,9 +13,9 @@
 #include "led.h"
 #include "i2c.h"
 #include "cmd_can.h"
-
-
-
+#include "flash.h"
+#include "reset.h"
+#include "util.h"
 
 
 bool hwInit(void);

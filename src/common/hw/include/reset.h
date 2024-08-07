@@ -9,9 +9,14 @@
 
 #ifdef _USE_HW_RESET
 
+
 #define RESET_MODE_FW     0
 #define RESET_MODE_BOOT   1
+#define RESET_BIT_UPDATE  2
 
+// #define RESET_BIT_BOOT       0
+// #define RESET_BIT_UPDATE     1
+// #define RESET_BIT_MAX        2
 
 void resetInit(void);
 
