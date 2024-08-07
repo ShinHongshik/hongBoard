@@ -16,9 +16,9 @@ typedef struct
 
 
 static flash_tbl_t flash_tbl[FLASH_SECTOR_MAX] =
-    {
-        {XIP_BASE + 0x20000,  PICO_FLASH_SIZE_BYTES - 128*1024},
-    };
+{
+    {XIP_BASE + 0x20000,  PICO_FLASH_SIZE_BYTES - 128*1024},
+};
 
 
 static bool flashInSector(uint16_t sector_num, uint32_t addr, uint32_t length);
@@ -240,7 +240,7 @@ bool flashInSector(uint16_t sector_num, uint32_t addr, uint32_t length)
   {
     ret = true;
   }
-
+  cliPrintf("ret = %d \r\n", ret);
   return ret;
 }
 

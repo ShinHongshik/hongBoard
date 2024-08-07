@@ -1,9 +1,12 @@
 #include "ap.h"
 #include "EthernetManager.hpp"
 #include "can_driver.h"
+#include "cmd_can.h"
+#include "cmd_boot.h"
 
 
 static cmd_can_t cmd_can;
+
 // static void apCore1(void *pvParameters);
 static void cliThread(void *args);
 
@@ -257,10 +260,17 @@ static void cliThread(void *args)
 
 
     if (EthernetManager::GetInstance()->IsAssignedIP()) {
-
         // EthernetLoopBack();
         if ( cmdCanReceivePacket(&cmd_can) == true ) {
-          bool ret = false;
+          // cliPrintf("packetreceived\r\n");
+          bool ret = true;
+          ret &= cmdBootProcess(&cmd_can);
+
+          if (ret != true)
+          {
+            cmdCanSendResp(&cmd_can, cmd_can.packet.cmd, ERR_CMD_NO_CMD, NULL, 0);
+          }
+        }
 
           // if ( cmd_can.rx_packet.type == PKT_TYPE_CMD ) {
           //   switch ( cmd_can.rx_packet.cmd ) {
@@ -274,7 +284,7 @@ static void cliThread(void *args)
           //       break;
           //   }
           // }
-        }
+        // }
 
         if (!t1 )
         {

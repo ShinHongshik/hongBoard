@@ -108,9 +108,9 @@
 #define FLASH_SIZE_FIRM             (1024*1024 - 128*1024)
 
 #define FLASH_ADDR_BOOT             0x10000000
-#define FLASH_ADDR_FIRM             0x10200000
+#define FLASH_ADDR_FIRM             0x10020000
 
-#define FLASH_ADDR_UPDATE           0x90800000
+#define FLASH_ADDR_UPDATE           0x10100000
 
 // #define FLASH_SIZE_TAG              0x400
 // #define FLASH_SIZE_VER              0x400

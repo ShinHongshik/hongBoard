@@ -77,7 +77,6 @@ static void bootVersion(cmd_can_t *p_cmd)
   if (p_firm->magic_number == VERSION_MAGIC_NUMBER) 
     boot_version.firm = *p_firm;
 
-
   flashRead(FLASH_ADDR_UPDATE + FLASH_SIZE_TAG + FLASH_SIZE_VER, (uint8_t *)&update, sizeof(firm_ver_t));
 
   if (update.magic_number == VERSION_MAGIC_NUMBER)
@@ -110,15 +109,21 @@ static void bootFirmErase(cmd_can_t *p_cmd)
   length |= ((uint32_t)p_packet->data[6] << 16);
   length |= ((uint32_t)p_packet->data[7] << 24);
 
+  // cliPrintf("size = %08x ",(addr+length) );
+  // cliPrintf("flash size firm size = %08x ",FLASH_SIZE_FIRM);
+
   if ((addr+length) < FLASH_SIZE_FIRM)
   {    
     if (flashErase(FLASH_ADDR_UPDATE + addr, length) != true)
     {
+      // cliPrintf("addr \r\n =%08x,   length=%d",(FLASH_ADDR_UPDATE + addr ), length);
+      // cliPrintf("faile addr \r\n =%08x",(FLASH_ADDR_UPDATE + addr ));
       err_code = ERR_BOOT_FLASH_ERASE;
     }
   }
   else
   {
+    // cliPrintf("ERR_BOOT_WRONG_RANGE");
     err_code = ERR_BOOT_WRONG_RANGE;
   } 
 
@@ -402,7 +407,11 @@ bool cmdBootProcess(cmd_can_t *p_cmd)
 {
   bool ret = true;
 
-
+  cliPrintf("packet cmd ------%d\r\n",p_cmd->packet.cmd);
+  cliPrintf("length %d\r\n",p_cmd->packet.length);
+  for ( int i = 0 ; i < p_cmd->packet.length; i++)
+    cliPrintf("%d %02x\r\n",i, p_cmd->packet.buffer[i]);
+#if 1
   switch(p_cmd->packet.cmd)
   {
     case BOOT_CMD_INFO:
@@ -455,5 +464,8 @@ bool cmdBootProcess(cmd_can_t *p_cmd)
   }
 
   return ret;
+#else 
+  return false;
+#endif
 }
 
