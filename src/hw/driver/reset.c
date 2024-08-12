@@ -51,10 +51,10 @@ void resetISR(void)
 
 void resetInit(void)
 {
-  // p_boot_mode->magic_number = MAGIC_NUMBER;
+  p_boot_mode->magic_number = MAGIC_NUMBER;
 
-  // reset_count = resetUpdateCount();
-  // reset_boot_mode = resetUpdateBootMode();
+  reset_count = resetUpdateCount();
+  reset_boot_mode = resetUpdateBootMode();
 
   resetSetBootMode(RESET_MODE_FW);
 
@@ -124,6 +124,12 @@ void resetToBoot(uint32_t timeout)
   }
 }
 
+
+void resetToReset(void)
+{
+  NVIC_SystemReset();
+}
+
 void resetToRunBoot(void)
 {
   cliPrintf("reset\r\n");
@@ -141,7 +147,6 @@ const char *resetGetBootModeMsg(void)
 {
   const char *ret_str = "NONE";
   uint32_t reset_mode;
-
 
   reset_mode = resetGetBootMode();
 

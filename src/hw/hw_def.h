@@ -8,7 +8,7 @@
 #include "bsp.h"
 
 #define _DEF_FIRMWATRE_VERSION    "V240729R1"
-#define _DEF_BOARD_NAME           "RP2040_APP"
+#define _DEF_BOARD_NAME           "RP2040_AP2"
 
 
 #if (FREERTOS_USE == 1)
@@ -74,7 +74,7 @@
 
 
 #define FLASH_IMAGE_FW              0x10020000
-#define FLASH_IMAGE_UPDATE          0x10200000
+#define FLASH_IMAGE_UPDATE          0x10100000
 #define FLASH_IMAGE_SIZE            (2*1024*1024)
 
 #define FLASH_ADDR_START            0x10020000

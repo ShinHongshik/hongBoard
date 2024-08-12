@@ -302,7 +302,9 @@ static void bootFirmUpdate(cmd_can_t *p_cmd)
   delay(100);
 
   // resetSetBootMode(1<<MODE_BIT_UPDATE);
-  // resetToReset();
+  // resetToBoot();
+  resetSetBootMode(1<<1);
+  resetToReset();
 }
 
 static void bootFirmJump(cmd_can_t *p_cmd)

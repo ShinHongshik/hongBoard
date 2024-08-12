@@ -10,13 +10,13 @@
 #ifdef _USE_HW_RESET
 
 
-#define RESET_MODE_FW     0
-#define RESET_MODE_BOOT   1
-#define RESET_BIT_UPDATE  2
+// #define RESET_MODE_FW     0
+// #define RESET_MODE_BOOT   1
+// #define RESET_BIT_UPDATE  2
 
-// #define RESET_BIT_BOOT       0
-// #define RESET_BIT_UPDATE     1
-// #define RESET_BIT_MAX        2
+#define RESET_MODE_BOOT       0
+#define RESET_MODE_FW     1
+#define RESET_MODE_MAX        2
 
 void resetInit(void);
 
@@ -28,6 +28,8 @@ uint32_t resetGetCount(void);
 void resetToBoot(uint32_t timeout);
 void resetToRunBoot(void);
 void resetToRunFw(void);
+void resetToReset(void);
+
 
 #endif
 
